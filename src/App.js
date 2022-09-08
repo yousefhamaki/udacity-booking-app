@@ -21,7 +21,7 @@ const App = () => {
       setResult("write something to start search");
     } else {
       Api.search(search, 15).then((res) => {
-        if (res) {
+        if (!res.error) {
           setResult(res);
         } else {
           setResult("no results found");
