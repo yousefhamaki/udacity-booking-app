@@ -7,7 +7,6 @@ import * as Api from "./BooksAPI";
 
 const App = () => {
   const [searchResult, setResult] = useState([]);
-  const [searchText, setText] = useState("");
   const [books, setBooks] = useState([]);
 
   const changeShelf = async (book, shelf) => {
@@ -18,18 +17,17 @@ const App = () => {
   };
 
   const getResult = (search) => {
-    Api.search(search, 15).then((res) => {
-      if (res) {
-        setResult(res);
-      } else {
-        setResult("no results found");
-      }
-    });
-  };
-
-  const handlerSearch = (e) => {
-    setText(e.target.value);
-    getResult(searchText);
+    if (search === "") {
+      setResult("write something to start search");
+    } else {
+      Api.search(search, 15).then((res) => {
+        if (res) {
+          setResult(res);
+        } else {
+          setResult("no results found");
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -51,7 +49,7 @@ const App = () => {
             element={
               <Search
                 changeShelf={changeShelf}
-                handlerSearch={handlerSearch}
+                handlerSearch={getResult}
                 search={searchResult}
                 data={books}
               />

@@ -7,14 +7,18 @@ const Search = ({ data, handlerSearch, search, changeShelf }) => {
     <div>
       <div className="search-books">
         <div className="search-books-bar">
-          <Link to="/" className="close-search">
+          <Link
+            onClick={(_e) => handlerSearch("")}
+            to="/"
+            className="close-search"
+          >
             {" "}
             Close
           </Link>
           <div className="search-books-input-wrapper">
             <input
               type="text"
-              onChange={(e) => handlerSearch(e)}
+              onChange={(e) => handlerSearch(e.target.value)}
               placeholder="Search by title, author, or ISBN"
             />
           </div>
@@ -33,7 +37,7 @@ const Search = ({ data, handlerSearch, search, changeShelf }) => {
                     <Item key={el.id} changeShelf={changeShelf} value={el} />
                   )
                 )
-              : "No results found"}
+              : search}
           </ol>
         </div>
       </div>

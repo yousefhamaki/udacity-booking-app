@@ -4,12 +4,10 @@ const ShelfChanger = ({ value, changeShelf }) => {
   return (
     <div className="book-shelf-changer">
       <select
-        value={value ? value.shelf : "none"}
+        value={value.shelf ? value.shelf : "none"}
         onChange={(e) => changeShelf(e)}
       >
-        <option value="none" disabled>
-          Move to...
-        </option>
+        <option disabled>Move to...</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want to Read</option>
         <option value="read">Read</option>
