@@ -9,14 +9,7 @@ const Shelf = ({ data, title, category, changeShelf }) => {
       <div className="bookshelf-books">
         <ol className="books-grid">
           {filter.map((el) => (
-            <Item
-              changeShelf={changeShelf}
-              key={el.id}
-              value={el}
-              title={el.title}
-              author={el.authors ? el.authors[0] : ""}
-              img={el.imageLinks.smallThumbnail}
-            />
+            <Item changeShelf={changeShelf} key={el.id} value={el} />
           ))}
         </ol>
       </div>

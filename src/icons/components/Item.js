@@ -1,9 +1,8 @@
 import React from "react";
 import ShelfChanger from "./ShelfChanger";
 
-const Item = ({ value, title, author, img, changeShelf }) => {
+const Item = ({ value, changeShelf }) => {
   const update = (e) => {
-    console.log(e.target.value);
     changeShelf(value, e.target.value);
   };
   return (
@@ -15,13 +14,17 @@ const Item = ({ value, title, author, img, changeShelf }) => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${img})`,
+              backgroundImage: `url(${
+                value.imageLinks ? value.imageLinks.smallThumbnail : ""
+              })`,
             }}
           ></div>
           <ShelfChanger changeShelf={update} value={value} />
         </div>
-        <div className="book-title">{title}</div>
-        <div className="book-authors">{author}</div>
+        <div className="book-title">{value.title}</div>
+        <div className="book-authors">
+          {value.authors ? value.authors[0] : ""}
+        </div>
       </div>
     </li>
   );

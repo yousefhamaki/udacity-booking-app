@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Item from "../icons/components/Item";
 
-const Search = ({ handlerSearch, search, changeShelf }) => {
+const Search = ({ data, handlerSearch, search, changeShelf }) => {
   return (
     <div>
       <div className="search-books">
@@ -22,16 +22,17 @@ const Search = ({ handlerSearch, search, changeShelf }) => {
         <div className="search-books-results">
           <ol className="books-grid">
             {Array.isArray(search)
-              ? search.map((el) => (
-                  <Item
-                    key={el.id}
-                    changeShelf={changeShelf}
-                    value={el}
-                    title={el.title}
-                    author={el.authors ? el.authors[0] : ""}
-                    img={el.imageLinks.smallThumbnail}
-                  />
-                ))
+              ? search.map((el) =>
+                  data.filter((d) => d.id === el.id).length > 0 ? (
+                    <Item
+                      key={el.id}
+                      changeShelf={changeShelf}
+                      value={data.filter((d) => d.id === el.id)[0]}
+                    />
+                  ) : (
+                    <Item key={el.id} changeShelf={changeShelf} value={el} />
+                  )
+                )
               : "No results found"}
           </ol>
         </div>
